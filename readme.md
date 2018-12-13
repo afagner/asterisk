@@ -29,3 +29,24 @@ Thread 10 (Thread 0x41d8f940 (LWP 3406)):
 > 5 0x00000033ce2d2f7d in clone () from /lib64/libc.so.6
 
 Um grep -rI “network_thread” no código-fonte do Asterisk revela que esta função pertence a chan_iax.c, desabilitar o chan_iax.so em modules.conf é uma boa solução para o seu problema, no entanto depuração adicional seria necessária para determinar porque o thread do monitor está dando voltas assim.
+
+> Desempenho do g729 retirado do site da Digium: Testes internos com dois processadores Intel Xeon 1.8GHz permitiram 60 chamadas simultâneas . Os processadores Dual Xeon de 2,8 GHz permitiram 80 chamadas simultâneas .
+
+Saiba Mais:
+https://www.voip-info.org/asterisk-dimensioning/
+
+
+> Ajuste de desempenho
+
+`[threadpool]
+;
+; For a busy 8 core PBX, these settings are probably safe.
+;
+initial_size = 10
+idle_timeout_sec = 120
+;
+; The notes about the pjsip max size apply here as well.  Increasing to 100 threads is probably
+; safe, but anything more will probably cause the same thrashing and memory over-utilization,
+max_size = 60`
+
+https://wiki.asterisk.org/wiki/display/AST/Performance+Tuning
