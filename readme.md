@@ -35,18 +35,22 @@ Um grep -rI “network_thread” no código-fonte do Asterisk revela que esta fu
 Saiba Mais:
 https://www.voip-info.org/asterisk-dimensioning/
 
+** Ajuste de desempenho **
 
-> Ajuste de desempenho
-
-`[threadpool]
-;
-; For a busy 8 core PBX, these settings are probably safe.
-;
-initial_size = 10
-idle_timeout_sec = 120
-;
-; The notes about the pjsip max size apply here as well.  Increasing to 100 threads is probably
-; safe, but anything more will probably cause the same thrashing and memory over-utilization,
-max_size = 60`
+> [threadpool]
+> ;
+> ; For a busy 8 core PBX, these settings are probably safe.
+> ;
+> initial_size = 10
+> idle_timeout_sec = 120
+> ;
+> ; The notes about the pjsip max size apply here as well.  Increasing to 100 threads is probably
+> ; safe, but anything more will probably cause the same thrashing and memory over-utilization,
+> max_size = 60
 
 https://wiki.asterisk.org/wiki/display/AST/Performance+Tuning
+
+** Migrar para Pjsip **
+
+https://wiki.asterisk.org/wiki/display/AST/Migrating+from+chan_sip+to+res_pjsip
+
